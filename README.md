@@ -52,7 +52,7 @@ _The shell prompt in your terminal may differ. Here, the_ `$` _sign is the shell
 
 ## How to Run
 1. After the Virtual Machine set up is done move to vagrant folder of this project and run `vagrant up` to start the Virtual Machine.
-2. For logging into the newly setup Virtual Machine run the command  `vagrant ssh` .
+2. For Accessing the newly setup Virtual Machine run the command  `vagrant ssh` .
 3. Once logged into the Virtual Machine use `cd /vagrant/moviecatalog/` this moves you to the directory where application script resides.
 4. For Starting the application run the command `python movieCatalog.py`.
 5. This makes the application available on your local machine at port 5000.
