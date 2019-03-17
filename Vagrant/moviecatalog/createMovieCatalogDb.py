@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
@@ -20,8 +22,9 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
 # Create dummy user
-adduser1 = UserDetails(users_name="Parvez Hussain", users_email="parvez@udacity.com",
-             users_image='https://commons.wikimedia.org/wiki/File:Udacity_logo.png')
+adduser1 = UserDetails(users_name="Parvez Hussain",
+                       users_email="parvez@udacity.com",
+                       users_image='https://commons.wikimedia.org/wiki/File:Udacity_logo.png')
 session.add(adduser1)
 session.commit()
 
@@ -31,12 +34,14 @@ MovieCategory1 = MovieCategory(genre="Action", users_id=1)
 session.add(MovieCategory1)
 session.commit()
 
-movie1 = MovieDetails(name="GoldenEye", users_id=1, description="James Bond teams up with the lone survivor of a destroyed Russian research center to stop the hijacking of a nuclear space weapon by a fellow Agent formerly believed to be dead.", moviecategory=MovieCategory1)
+movie1 = MovieDetails(name="GoldenEye", users_id=1,
+                      description="James Bond teams up with the lone survivor of a destroyed Russian research center to stop the hijacking of a nuclear space weapon by a fellow Agent formerly believed to be dead.", moviecategory=MovieCategory1)
 
 session.add(movie1)
 session.commit()
 
-movie2 = MovieDetails(name="Tomorrow Never Dies", users_id=1,  description="James Bond heads to stop a media mogul's plan to induce war between China and the UK in order to obtain exclusive global media coverage.", moviecategory=MovieCategory1)
+movie2 = MovieDetails(name="Tomorrow Never Dies", users_id=1,
+                      description="James Bond heads to stop a media mogul's plan to induce war between China and the UK in order to obtain exclusive global media coverage.", moviecategory=MovieCategory1)
 
 session.add(movie2)
 session.commit()
@@ -52,12 +57,14 @@ MovieCategory2 = MovieCategory(genre="Animation", users_id=1)
 session.add(MovieCategory2)
 session.commit()
 
-movie1 = MovieDetails(name="The Lion King", users_id=1, description="As a cub, Simba is forced to leave the Pride Lands after his father Mufasa is murdered by his wicked uncle, Scar. Years later, he returns as a young lion to reclaim his throne.", moviecategory=MovieCategory2)
+movie1 = MovieDetails(name="The Lion King", users_id=1,
+                      description="As a cub, Simba is forced to leave the Pride Lands after his father Mufasa is murdered by his wicked uncle, Scar. Years later, he returns as a young lion to reclaim his throne.", moviecategory=MovieCategory2)
 
 session.add(movie1)
 session.commit()
 
-movie2 = MovieDetails(name="Beauty and the Beast", users_id=1,  description="Belle, a beautiful young woman, agrees to live with the Beast in exchange for the return of her abducted father. Soon, Belle discovers that her hideous captor is actually an enchanted prince.", moviecategory=MovieCategory2)
+movie2 = MovieDetails(name="Beauty and the Beast", users_id=1,
+                      description="Belle, a beautiful young woman, agrees to live with the Beast in exchange for the return of her abducted father. Soon, Belle discovers that her hideous captor is actually an enchanted prince.", moviecategory=MovieCategory2)
 
 session.add(movie2)
 session.commit()
@@ -73,17 +80,20 @@ MovieCategory3 = MovieCategory(genre="Adventure", users_id=1)
 session.add(MovieCategory3)
 session.commit()
 
-movie1 = MovieDetails(name="Back to the Future", users_id=1, description="Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the maverick scientist Doc Brown.", moviecategory=MovieCategory3)
+movie1 = MovieDetails(name="Back to the Future", users_id=1,
+                      description="Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past in a time-traveling DeLorean invented by his close friend, the maverick scientist Doc Brown.", moviecategory=MovieCategory3)
 
 session.add(movie1)
 session.commit()
 
-movie2 = MovieDetails(name="Back to the Future Part II", users_id=1, description="After visiting 2015, Marty McFly must repeat his visit to 1955 to prevent disastrous changes to 1985...without interfering with his first trip.", moviecategory=MovieCategory3)
+movie2 = MovieDetails(name="Back to the Future Part II", users_id=1,
+                      description="After visiting 2015, Marty McFly must repeat his visit to 1955 to prevent disastrous changes to 1985...without interfering with his first trip.", moviecategory=MovieCategory3)
 
 session.add(movie2)
 session.commit()
 
-movie3 = MovieDetails(name="Back to the Future Part III", users_id=1, description="Enjoying a peaceable existence in 1885, Doctor Emmet Brown is about to be killed by Buford Mad Dog Tannen. Marty McFly travels back in time to save his friend.", moviecategory=MovieCategory3)
+movie3 = MovieDetails(name="Back to the Future Part III", users_id=1,
+                      description="Enjoying a peaceable existence in 1885, Doctor Emmet Brown is about to be killed by Buford Mad Dog Tannen. Marty McFly travels back in time to save his friend.", moviecategory=MovieCategory3)
 
 session.add(movie3)
 session.commit()
@@ -94,12 +104,14 @@ MovieCategory4 = MovieCategory(genre="Crime", users_id=1)
 session.add(MovieCategory3)
 session.commit()
 
-movie1 = MovieDetails(name="The Godfather", users_id=1, description="The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", moviecategory=MovieCategory4)
+movie1 = MovieDetails(name="The Godfather", users_id=1,
+                      description="The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.", moviecategory=MovieCategory4)
 
 session.add(movie1)
 session.commit()
 
-movie2 = MovieDetails(name="Pulp Fiction", users_id=1, description="The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.", moviecategory=MovieCategory4)
+movie2 = MovieDetails(name="Pulp Fiction", users_id=1,
+                      description="The lives of two mob hitmen, a boxer, a gangster's wife, and a pair of diner bandits intertwine in four tales of violence and redemption.", moviecategory=MovieCategory4)
 
 session.add(movie2)
 session.commit()

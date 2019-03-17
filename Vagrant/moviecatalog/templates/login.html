@@ -10,7 +10,7 @@
 	<script src="//apis.google.com/js/platform.js?onload=start"> </script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<link rel="stylesheet" href="/static/milligram.min.css">
-    <link rel = "icon" type = "image/png" href = "/static/icon.png">
+	<link rel = "icon" type = "image/png" href = "/static/icon.png">
 	<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
@@ -29,17 +29,17 @@
 					contentType: 'application/octet-stream; charset=utf-8',
 					success: function(result) {
 			        	// Handle or verify the server response if necessary.
-				        if (result) {
-				        	$('#login').html('Logging in...')
-							window.location.href = "/catalog";
-							gapi.auth2.getAuthInstance().signOut();
-						} else if (googleUser['error']) {
-							console.log('There was an error: ' + googleUser['error']);
-						} else {
-							$('#login').html('Failed to make a server-side call. Check your configuration and console.');
-						}
-					}
-				});
+			        	if (result) {
+			        		$('#login').html('Logging in...')
+			        		window.location.href = "/catalog";
+			        		gapi.auth2.getAuthInstance().signOut();
+			        	} else if (googleUser['error']) {
+			        		console.log('There was an error: ' + googleUser['error']);
+			        	} else {
+			        		$('#login').html('Failed to make a server-side call. Check your configuration and console.');
+			        	}
+			        }
+			    });
 			}
 		}
 	</script>
@@ -113,24 +113,24 @@
 		<div class="content">
 			<div align="center" id="login" class="container text-center">
 				<fb:login-button size="large" scope="public_profile,email" onlogin="sendTokenToServer();">
-					<a href='javascript:sendTokenToServer()'>Login with Facebook</a>
-				</fb:login-button>
+				<a href='javascript:sendTokenToServer()'>Login with Facebook</a>
+			</fb:login-button>
 
-				<div align="center" class="login__separator">OR</div>
+			<div align="center" class="login__separator">OR</div>
 
-				<div align="center" id="signInButton">
-					<span class="g-signin2"
-						data-scope="openid email"
-						data-redirecturi="postmessage"
-						data-accesstype="offline"
-						data-cookiepolicy="single_host_origin"
-						data-onsuccess="onSignIn"
-                        data-onfailure="onSignInFailure"
-						data-approvalprompt="force">
-					</span>
-				</div>
-			</div>
+			<div align="center" id="signInButton">
+				<span class="g-signin2"
+				data-scope="openid email"
+				data-redirecturi="postmessage"
+				data-accesstype="offline"
+				data-cookiepolicy="single_host_origin"
+				data-onsuccess="onSignIn"
+				data-onfailure="onSignInFailure"
+				data-approvalprompt="force">
+			</span>
 		</div>
+	</div>
+</div>
 </div>
 </body>
 </html>

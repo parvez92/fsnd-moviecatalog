@@ -2,30 +2,30 @@
 
 {% block content %}
 
-  <div class="row">
-    <div class="category-item column">
-      <h6 class="modification__header">
-        <span class="header__title">Add New Genre</span>
-        <span class="header__bar"></span>
-      </h6>
-      <form action="#" method="post" class="movie__form">
-        <fieldset>
-          <label for="" class="form__label">Genre Name:</label>
-          <input type="text" name="genre" class="form__input">
-          </select>
-        </fieldset>
-        <div class="navigation__controls">
-        <a href="{{url_for('showGenres')}}" class="controls__back">Back</a>
-        <input type="submit" value="Add Genre">
-        {% with messages = get_flashed_messages() %}
-          {% if messages %}
-            {% for message in messages %}
-               <p class="flash__message">{{ message }}</p>
-            {% endfor %}
-          {% endif %}
-        {% endwith %}
-      </form>
-    </div>
+<div class="row">
+  <div class="category-item column">
+    <h6 class="modification__header">
+      <span class="header__title">Add New Genre</span>
+      <span class="header__bar"></span>
+    </h6>
+    <form action="#" method="post" class="movie__form">
+      <fieldset>
+        <label for="" class="form__label">Genre Name:</label>
+        <input type="text" name="genre" class="form__input">
+      </select>
+    </fieldset>
+    <div class="navigation__controls">
+      <a href="{{url_for('showGenres')}}" class="controls__back">Back</a>
+      <input type="submit" value="Add Genre">
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      {% for message in messages %}
+      <p class="flash__message">{{ message }}</p>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+    </form>
   </div>
+</div>
 
 {% endblock %}

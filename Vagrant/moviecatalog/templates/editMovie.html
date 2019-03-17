@@ -2,40 +2,40 @@
 
 {% block content %}
 
-	<div class="row">
-		<div class="category-item column">
-			<h6 class="modification__header">
-				<span class="header__title">Edit Movie</span>
-				<span class="header__bar"></span>
-			</h6>
-			<form action="#" method="post" class="movie__form">
-				<fieldset>
-					<label for="" class="form__label">Name:</label>
-					<input type="text" name="name" value="{{movies.name}}" class="form__input">
-					<label for="" class="form__label">Description:</label>
-					<textarea name="description" id="" cols="30" rows="10" class="form__textarea">{{movies.description}}</textarea>
-					<label for="" class="form__label">Genre:</label>
-					<select class="form__select" name="genre">
-						{% for genre in genres %}
-							{% if movies.movie_category_id == genre.id %}
-								<option selected value="{{genre.id}}">{{genre.genre}}</option>
-							{% else %}
-								<option value="{{genre.id}}">{{genre.genre}}</option>
-							{% endif %}
-						{% endfor %}
-					</select>
-				</fieldset>
-				<a href="{{url_for('showMovie', genre_id = movies.movie_category_id ,movie_id = movies.id )}}" class="button button-outline">Back</a>
-				<input type="submit" value="Save">
-				{% with messages = get_flashed_messages() %}
-					{% if messages %}
-						{% for message in messages %}
-							 <p class="flash__message">{{ message }}</p>
-						{% endfor %}
+<div class="row">
+	<div class="category-item column">
+		<h6 class="modification__header">
+			<span class="header__title">Edit Movie</span>
+			<span class="header__bar"></span>
+		</h6>
+		<form action="#" method="post" class="movie__form">
+			<fieldset>
+				<label for="" class="form__label">Name:</label>
+				<input type="text" name="name" value="{{movies.name}}" class="form__input">
+				<label for="" class="form__label">Description:</label>
+				<textarea name="description" id="" cols="30" rows="10" class="form__textarea">{{movies.description}}</textarea>
+				<label for="" class="form__label">Genre:</label>
+				<select class="form__select" name="genre">
+					{% for genre in genres %}
+					{% if movies.movie_category_id == genre.id %}
+					<option selected value="{{genre.id}}">{{genre.genre}}</option>
+					{% else %}
+					<option value="{{genre.id}}">{{genre.genre}}</option>
 					{% endif %}
-				{% endwith %}
-			</form>
-		</div>
+					{% endfor %}
+				</select>
+			</fieldset>
+			<a href="{{url_for('showMovie', genre_id = movies.movie_category_id ,movie_id = movies.id )}}" class="button button-outline">Back</a>
+			<input type="submit" value="Save">
+			{% with messages = get_flashed_messages() %}
+			{% if messages %}
+			{% for message in messages %}
+			<p class="flash__message">{{ message }}</p>
+			{% endfor %}
+			{% endif %}
+			{% endwith %}
+		</form>
 	</div>
+</div>
 
 {% endblock %}

@@ -11,37 +11,37 @@
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
 	<link rel = "icon" type = "image/png" href = "/static/icon.png">
-    <link rel="stylesheet" href="/static/milligram.min.css">
+	<link rel="stylesheet" href="/static/milligram.min.css">
 	<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 	<div class="bg">
-	<div class="wrapper">
-		<header class="header">
-			<div class="container">
-				<a href="/" class="header__title">
-					<h1 class="title__text">Movie Catalog</h1>
-				</a>
-				<div class="header__user">
-					{%if 'username' not in session %}
-					<a href="{{url_for('login')}}" class="user__nav">
-						Login
+		<div class="wrapper">
+			<header class="header">
+				<div class="container">
+					<a href="/" class="header__title">
+						<h1 class="title__text">Movie Catalog</h1>
 					</a>
-					{% else %}
-					<a href="{{url_for('logout')}}" class="user__nav">
-						Logout
-					</a>
-					{% endif %}
+					<div class="header__user">
+						{%if 'username' not in session %}
+						<a href="{{url_for('login')}}" class="user__nav">
+							Login
+						</a>
+						{% else %}
+						<a href="{{url_for('logout')}}" class="user__nav">
+							Logout
+						</a>
+						{% endif %}
+					</div>
+				</div>
+			</header>
+			<div class="content">	
+				<div class="container">
+					{% block content %}
+					{% endblock %}
 				</div>
 			</div>
-		</header>
-		<div class="content">	
-			<div class="container">
-				{% block content %}
-				{% endblock %}
-			</div>
 		</div>
-	</div>
 	</div>
 </body>
 </html>
