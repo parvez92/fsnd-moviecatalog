@@ -10,7 +10,7 @@ Used Technologies : Flask, SQLAlchemy, Google and Facebook Authentication, Milli
 - [Capabilities of the Application](#Capabilties)
 - [How to Run](#how-to-run)
 - [Content of the Project](#content)
-- [Supporting Materials](#supporting-materials)
+- [Supporting Materials And Biblography](#supporting)
 
 ## Installallation
 The project requires python 3,Flask and SQLAlchemy.For this project all these are packaged in the Vagrant file available in the vagrant folder of the project and the file can be run on Virtual box.
@@ -37,7 +37,7 @@ _The shell prompt in your terminal may differ. Here, the_ `$` _sign is the shell
 
 ### More Details about Virtual box and Vagrant Setup can be found here.
 [VM](https://github.com/udacity/fullstack-nanodegree-vm/blob/master/README.md)
-
+<a name="Capabilties"></a>
 ## Capabilities of the Application
 1. For an Unauthenticated and Unregisterd user the application will serve the all the Genre and Movie details as read-only.
 2. User can use the log-in option availale on top right hand corner for accessing the application.
@@ -69,6 +69,7 @@ For accessing the API's please use `http://localhost:5000/` followed by the URI 
 3. **URI:/moviecatalog/int:genre_id/movies/JSON** This URI serves all the movies available in a particular genre.
 4. **URI:/moviecatalog/int:genre_id/movie/int:movie_id/JSON** This URI serves the movie description of the movie queried.
 
+<a name="content"></a>
 ## Content of the Project
 
 #### Vagrantfile: 
@@ -104,6 +105,7 @@ The movieCatalog python script holds the code for serving the application the fo
 10. **gconnect:** For Authenticating the user who used Google for accessing the application.
 11. **gdisconnect:** For revoking the user's Authentication token provided by Google.
 
+<a name="supporting"></a>
 ## Supporting Materials and Biblography:
 
 The Project was developed as part of full-stack-nano-degree program provided by Udacity and the information for Virtual Machine setup using Virtual Box and Vagrant shared above([VM](https://github.com/udacity/fullstack-nanodegree-vm/blob/master/README.md)) is provided by Udacity.
