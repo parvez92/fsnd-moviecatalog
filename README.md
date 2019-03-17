@@ -12,6 +12,7 @@ Used Technologies : Flask, SQLAlchemy, Google and Facebook Authentication, Milli
 - [Content of the Project](#content)
 - [Supporting Materials And Biblography](#supporting)
 
+<a name="installation"></a>
 ## Installallation
 The project requires python 3,Flask and SQLAlchemy.For this project all these are packaged in the Vagrant file available in the vagrant folder of the project and the file can be run on Virtual box.
 
@@ -49,7 +50,7 @@ _The shell prompt in your terminal may differ. Here, the_ `$` _sign is the shell
 8. Flash messages would be displayed after successfull Addition or Editing or Deletion of Movies.
 9. The Application is available at port:5000  
 
-
+<a name="how-to-run"></a>
 ## How to Run
 1. After the Virtual Machine set up is done move to vagrant folder of this project and run `vagrant up` to start the Virtual Machine.
 2. For Accessing the newly setup Virtual Machine run the command  `vagrant ssh` .
