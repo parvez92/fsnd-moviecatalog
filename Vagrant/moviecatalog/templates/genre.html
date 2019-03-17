@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="categories column column-25">
+			<div class="categories__list">
+				<h6 class="list__header">
+					<span class="header__title">Movie Categories</span>
+					<span class="header__bar"></span>
+				</h6>
+				<ul class="list__items">
+					{% for genre in moviegenres %}
+						<a href="{{url_for('showGenre', genre_id = genre.id )}}">
+							<li class="items__item">
+								<span class="item__name">{{genre.genre}}</span>
+							</li>
+						</a>
+					{% endfor %}
+				</ul>
+				{% if 'username' in session %}
+					<a href="{{url_for('addGenre')}}" class="button u list__add">Add Genre</a>
+				{% endif %}
+			</div>
+		</div>
+
+		<div class="category-items column column-75">
+			<div class="category-items__list">
+				<h6 class="list__header">
+					<span class="header__title">{{movieName}} Movies ({{moviesPerGenre}} {%if moviesPerGenre ==1%} Movie {% else %}Movies {% endif %})</span>
+					<span class="header__bar"></span>
+				</h6>
+				<ul class="list__items">
+					{% for movie in movies %}
+						<a href="{{url_for('showMovie', genre_id = movie.movie_category_id ,movie_id = movie.id )}}">
+							<li class="items__item">
+								<span class="item__name">{{movie.name}}</span>
+							</li>
+						</a>
+					{% endfor %}
+				</ul>
+				<!-- <a href="/" class="button u list__add">Add Item</a> -->
+			</div>
+							{% if 'username' in session %}
+					<a href="{{url_for('addMovie')}}" class="button u list__add">Add Movie</a>
+				{% endif %}
+		</div>
+	</div>
+
+{% endblock %}

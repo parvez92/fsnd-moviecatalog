@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+	<div class="row">
+		<div class="category-item column">
+			<h5 class="modification__header">
+				<span class="header__title">{{moviedetails.name}}</span>
+				<span class="header__bar"></span>
+			</h5>
+			<div class="movie__description">
+				{{moviedetails.description}}
+			</div>
+			<div class="navigation__controls">
+				<a href="{{url_for('showGenre', genre_id = moviedetails.movie_category_id)}}" class="controls__back">Back</a>
+
+				{% if 'username' in session and creator.users_id == session['user_id'] %}
+					<a href="{{url_for('editMovie', genre_id = moviedetails.movie_category_id, movie_id = moviedetails.id)}}" class="controls__edit">Edit</a>
+					<a href="{{url_for('deleteMovie', genre_id = moviedetails.movie_category_id, movie_id = moviedetails.id)}}" class="controls__delete">Delete</a>
+				{% endif %}
+				{% with messages = get_flashed_messages() %}
+					{% if messages %}
+						{% for message in messages %}
+							 <p class="flash__message">{{ message }}</p>
+						{% endfor %}
+					{% endif %}
+				{% endwith %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
