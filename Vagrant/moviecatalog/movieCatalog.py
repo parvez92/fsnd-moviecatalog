@@ -1,6 +1,13 @@
 #!/usr/bin/env python3
-from flask import Flask, render_template, url_for, request, redirect, jsonify
-from flask import make_response, flash
+from flask import (Flask,
+                   render_template,
+                   url_for,
+                   request,
+                   redirect,
+                   jsonify,
+                   make_response,
+                   flash)
+from functools import wraps
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from dataBase_Setup import UserDetails, MovieCategory, MovieDetails, Base
@@ -49,8 +56,26 @@ def getUserID(email):
     try:
         user = session.query(UserDetails).filter_by(users_email=email).one()
         return user.users_id
-    except:
+    except Exception:
         return None
+
+
+'''
+
+Decarator for checking whether the user is
+logged in or not
+'''
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if 'username' in login_session:
+            return f(*args, **kwargs)
+        else:
+            flash('You are not allowed to access there')
+            return redirect('/login')
+    return decorated_function
 
 
 @app.route('/')
@@ -108,10 +133,6 @@ def showMovie(genre_id, movie_id):
 
 @app.route('/movie/add', methods=['GET', 'POST'])
 def addMovie():
-    # Check if user is logged in
-    if 'username' not in login_session:
-        return redirect('/login')
-
     if request.method == 'POST':
 
         if not request.form['name']:
@@ -141,10 +162,6 @@ def addMovie():
 
 @app.route('/genre/add', methods=['GET', 'POST'])
 def addGenre():
-    # Check if user is logged in
-    if 'username' not in login_session:
-        return redirect('/login')
-
     if request.method == 'POST':
 
         if not request.form['genre']:
@@ -174,11 +191,8 @@ def addGenre():
 
 @app.route('/catalog/<int:genre_id>/movies/<int:movie_id>/edit',
            methods=['GET', 'POST'])
+@login_required
 def editMovie(genre_id, movie_id):
-    # Check if user is logged in
-    if 'username' not in login_session:
-        return redirect('/login')
-
     # Get Movie
     movie = session.query(MovieDetails).filter_by(id=movie_id).first()
 
@@ -206,9 +220,11 @@ def editMovie(genre_id, movie_id):
                                     genre_id=movie.movie_category_id,
                                     movie_id=movie.id))
 
-        if movie.name == request.form['name'] and movie.description == request.form['description'] and str(movie.movie_category_id) == request.form['genre']:
+        if (movie.name == request.form['name'] and
+                movie.description == request.form['description'] and
+                str(movie.movie_category_id) == request.form['genre']):
             flash(
-                'No changes were made for as previous values were provided')
+                'No changes were made as previous values were provided')
             return redirect(url_for('editMovie',
                                     genre_id=movie.movie_category_id,
                                     movie_id=movie.id))
@@ -231,11 +247,8 @@ def editMovie(genre_id, movie_id):
 
 @app.route('/catalog/<int:genre_id>/items/<int:movie_id>/delete',
            methods=['GET', 'POST'])
+@login_required
 def deleteMovie(genre_id, movie_id):
-    # Check if user is logged in
-    if 'username' not in login_session:
-        return redirect('/login')
-
     # Get movie
     movie = session.query(MovieDetails).filter_by(id=movie_id).first()
 
@@ -306,8 +319,7 @@ def fbconnect():
     app_secret = json.loads(open('fb_client_secrets.json', 'r').read())[
         'web']['app_secret']
 
-    url = 'https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s' % (
-        app_id, app_secret, access_token)
+    url = 'https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=%s&client_secret=%s&fb_exchange_token=%s' % (app_id, app_secret, access_token)  # NOQA
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
 
@@ -317,7 +329,7 @@ def fbconnect():
     # strip expire tag from access token
     token = json.loads(result)['access_token']
 
-    url = 'https://graph.facebook.com/v2.4/me?access_token=%s&fields=name,id,email' % token
+    url = 'https://graph.facebook.com/v2.4/me?access_token=%s&fields=name,id,email' % token  # NOQA
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
 
@@ -332,7 +344,7 @@ def fbconnect():
     login_session['access_token'] = stored_token
 
     # Get user picture
-    url = 'https://graph.facebook.com/v2.4/me/picture?access_token=%s&redirect=0&height=200&width=200' % token
+    url = 'https://graph.facebook.com/v2.4/me/picture?access_token=%s&redirect=0&height=200&width=200' % token  # NOQA
     h = httplib2.Http()
     result = h.request(url, 'GET')[1]
     data = json.loads(result)
@@ -480,7 +492,8 @@ def showgenresJSON():
 def showMoviesIngenreJSON(genre_id):
     moviesIngenre = session.query(MovieDetails).filter_by(
         movie_category_id=genre_id).all()
-    return jsonify(moviesIngenre=[moviedetail.serialize for moviedetail in moviesIngenre])
+    return jsonify(moviesIngenre=[moviedetail.serialize
+                                  for moviedetail in moviesIngenre])
 
 
 @app.route('/moviecatalog/<int:genre_id>/movie/<int:movie_id>/JSON')
